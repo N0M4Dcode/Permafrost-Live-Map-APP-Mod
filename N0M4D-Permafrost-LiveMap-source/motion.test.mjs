@@ -1,0 +1,16 @@
+import {Motion} from './Companion/dist/motion.js';
+import assert from 'node:assert/strict';
+const sample=(sequence,x,yaw=0,extra={})=>({sequence,position:{x,y:0,z:0},yaw,world:'world',pawn:'pawn',session:'session',timestamp:100+sequence,...extra});
+const m=new Motion(100);
+assert.equal(m.push(sample(1,0,350),0),true);
+m.push(sample(2,100,10),100);
+assert.equal(m.at(150).position.x,50);assert.equal(m.at(150).yaw,360);
+assert.equal(m.push(sample(2,100),110),false);
+assert.equal(m.at(500).position.x,100);assert.equal(m.at(1700),null);
+assert.equal(m.push(sample(3,50000),1800),true);assert.equal(m.at(1800).position.x,50000);
+assert.equal(m.push(sample(4,50001,0,{pawn:'respawn'}),1850),true);
+assert.equal(m.push(sample(5,50002,0,{world:'new'}),1900),true);
+m.reset();assert.equal(m.at(2000),null);
+assert.equal(m.push(sample(1,NaN),2100),false);
+m.push(sample(5,0),2200);assert.equal(m.push(sample(4,50),2250),false);
+console.log('PASS: interpolation, heading wrap, duplicate/out-of-order samples, bounded motion, stale feed, teleport, respawn, world change, reset, invalid input.');

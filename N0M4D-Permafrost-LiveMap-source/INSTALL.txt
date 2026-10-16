@@ -1,0 +1,85 @@
+N0M4D'S PERMAFROST LIVE MAP — VERSION 1.0
+Local release candidate / publication permissions pending
+
+CONTENTS
+N0M4DLiveMap\                  Native Windows desktop app and map interface
+Permafrost\Binaries\Win64\ue4ss\Mods\N0M4DTelemetry\
+                               Separate UE4SS player telemetry mod
+CREDITS.md                     Original authors and third-party credits
+
+REQUIREMENTS
+- Windows x64 with Permafrost.
+- UE4SS with Lua support, installed for your game version.
+  Official GitHub: https://github.com/UE4SS-RE/RE-UE4SS
+  Releases: https://github.com/UE4SS-RE/RE-UE4SS/releases
+  Install guide: https://docs.ue4ss.com/installation-guide.html
+  UE4SS is not included. Use a release compatible with your game.
+- .NET 10 Windows Desktop Runtime (x64) AND ASP.NET Core Runtime 10 (x64).
+  https://dotnet.microsoft.com/en-us/download/dotnet/10.0
+  This is a framework-dependent app; runtimes are not bundled.
+- Microsoft Edge WebView2 Runtime.
+  https://developer.microsoft.com/en-us/microsoft-edge/webview2/
+- Internet access for MetaBot.GG map tiles.
+
+INSTALL
+1. Close Permafrost and the map app. Back up any existing companion/mod files.
+2. Open the game's installation folder: the folder containing Permafrost.exe.
+3. Extract this archive there. N0M4DLiveMap must sit next to Permafrost.exe.
+   The nested Permafrost folder merges with the game's existing folder.
+4. If azam8's original PermafrostLiveMap mod is installed, disable it first:
+   rename its enabled.txt to enabled.txt.disabled. If mods.txt explicitly
+   enables it, set that entry to 0. Do not disable unrelated mods.
+5. Run N0M4DLiveMap\PermafrostLiveMap.exe. No BAT, CMD, Python or PowerShell
+   launcher is required. You can create a Windows shortcut to this EXE.
+6. Start Permafrost and load a character. The app waits for the local feed.
+
+USE
+Drag the title bar to move; double-click to maximize/restore. The themed
+buttons minimize, maximize/restore and close the app. Resize at window edges.
+F11 toggles fullscreen; Escape exits fullscreen.
+Choose Default, N0M4D or Custom theme. Adjust smoothing from 50 to 250 ms.
+Lower smoothing reduces delay; higher smoothing absorbs uneven samples.
+Use map layers/search, follow, labels, trails, right-click pins and Align map.
+Run only one app instance: the native server uses 127.0.0.1:8767.
+
+SAVED SETTINGS AND PRIVACY
+WebView2 profile: %LOCALAPPDATA%\N0M4D\PermafrostLiveMap\WebView2
+Pins, calibration and preferences persist there. Old browser settings are not
+imported automatically. Player telemetry stays on the PC. The map downloads
+static tiles from MetaBot.GG; reference links open in your normal browser.
+
+TROUBLESHOOTING
+Waiting for player: load a character and confirm UE4SS loaded N0M4DTelemetry.
+Disconnected: confirm position.json inside N0M4DTelemetry is updating.
+Map offset: use Align map. Included calibration matches the supplied map.
+Startup failure: check both .NET runtimes, WebView2 and port 8767 availability.
+Missing tiles: check your connection and MetaBot.GG availability.
+
+UNINSTALL / ROLLBACK
+Close the game and app. Remove N0M4DLiveMap and only the N0M4DTelemetry mod
+folder. Restore the original mod's enabled.txt and any changed mods.txt entry
+if you want to return to the original companion. Do not remove UE4SS or other
+mods. Keep the WebView2 profile to preserve settings, or delete it separately.
+
+TEST STATUS
+Release build, JavaScript syntax, motion unit tests, native feed tests and
+local HTTP smoke checks passed. The separate mod loaded in UE4SS and produced
+waiting_for_player samples. New-mod movement, measured 60 FPS and a complete
+interactive regression across window controls/map features are not certified.
+NuGet vulnerability metadata could not be fetched during build.
+
+CREDITS AND RELEASE STATUS
+Original companion/interface: azam8
+https://www.nexusmods.com/permafrost/mods/25
+Map tiles and reference data: MetaBot.GG
+https://metabot.gg/en/permafrost/map
+Game and map artwork: SpaceRocket Games / Toplitz Productions
+UE4SS: UE4SS project and contributors
+https://github.com/UE4SS-RE/RE-UE4SS
+
+This package retains/adapts the original companion interface. It is not a
+wholly original replacement. The original mod page restricts modification,
+asset reuse and redistribution. Obtain the relevant author permissions before
+uploading this package to Nexus or elsewhere. Attribution is not permission.
+This archive is a local review candidate, not a permission-cleared release.
+
